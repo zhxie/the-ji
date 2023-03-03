@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Ji Watch",
-    "slug": "ji-watch",
+    "name": "The JI",
+    "slug": "the-ji",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "ji-watch",
+    "scheme": "the-ji",
     "userInterfaceStyle": "automatic",
     "splash": {
       "backgroundColor": "#000000"
