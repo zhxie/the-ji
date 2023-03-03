@@ -1,15 +1,7 @@
-# Expo Router Example
+# The JI
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+All film rated by JI in your hand.
 
-## 🚀 How to use
+## License
 
-```sh
-npx create-react-native-app -t with-router
-```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
-- [Request for Comments](https://github.com/expo/router/discussions/1)
+The JI is licensed under [the MIT License](/LICENSE).
