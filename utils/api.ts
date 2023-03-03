@@ -1,13 +1,19 @@
-import MovieListData from "../data/movie-list.json";
-import MovieData from "../data/movie.json";
-import { MovieList, MovieDetail } from "../models/types";
+import { FilmList, FilmDetail } from "../models/types";
 
-export const fetchMovieList = async () => {
-  const json = MovieListData;
-  return json as MovieList;
+export const fetchFilmList = async () => {
+  const res = await fetch("https://raw.fastgit.org/zhxie/the-ji/data/data/movie-list.json");
+  if (res.status != 200 && res.status != 304) {
+    return;
+  }
+  const json = await res.json();
+  return json as FilmList;
 };
 
-export const fetchMovie = async (id: number) => {
-  const json = MovieData[id];
-  return json as MovieDetail;
+export const fetchFilm = async (id: number) => {
+  const res = await fetch(`https://raw.fastgit.org/zhxie/the-ji/data/data/films/${id}.json`);
+  if (res.status != 200 && res.status != 304) {
+    return;
+  }
+  const json = await res.json();
+  return json as FilmDetail;
 };

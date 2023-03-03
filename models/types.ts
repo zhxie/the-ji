@@ -1,15 +1,15 @@
-export interface Movie {
+export interface Film {
   id: number;
   thumbnail: string;
   rating: number;
   last_review_date: string;
 }
 
-export interface MovieList {
-  movies: Movie[];
+export interface FilmList {
+  films: Film[];
 }
 
-export interface MovieDetail {
+export interface FilmDetail {
   id: number;
   tmdb?: number;
   title: string;

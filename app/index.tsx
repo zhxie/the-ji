@@ -5,18 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Poster, ViewStyles } from "../components";
-import { Movie } from "../models/types";
-import { fetchMovieList } from "../utils/api";
+import { Film } from "../models/types";
+import { fetchFilmList } from "../utils/api";
 
 const Page = () => {
   const [ready, setReady] = useState(false);
-  const [movies, setMovies] = useState<Movie[]>();
+  const [films, setFilms] = useState<Film[]>();
 
   useEffect(() => {
     (async () => {
-      const list = await fetchMovieList();
+      const list = await fetchFilmList();
       if (list) {
-        setMovies(list.movies);
+        setFilms(list.films);
         setReady(true);
       }
     })();
@@ -36,13 +36,13 @@ const Page = () => {
     <SafeAreaProvider>
       <StatusBar style="light" />
       <View style={[ViewStyles.bg, ViewStyles.f]}>
-        {movies && (
+        {films && (
           <Animated.View style={[ViewStyles.f, { opacity: fade }]}>
             <MasonryFlashList
-              data={movies}
+              data={films}
               numColumns={Math.ceil(Dimensions.get("window").width / 200)}
               renderItem={({ item }) => (
-                <Link href={{ pathname: "movie", params: { id: item.id } }} asChild>
+                <Link href={{ pathname: "film", params: { id: item.id } }} asChild>
                   <TouchableOpacity>
                     <Poster uri={item.thumbnail} rating={item.rating} style={ViewStyles.p2} />
                   </TouchableOpacity>

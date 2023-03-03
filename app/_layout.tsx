@@ -10,7 +10,7 @@ export default function Layout() {
         }}
       />
       <Stack.Screen
-        name="movie"
+        name="film"
         options={{
           headerShown: false,
         }}

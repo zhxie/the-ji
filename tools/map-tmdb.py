@@ -79,7 +79,7 @@ def main():
                     ],
                 }
             )
-    print(f"Parse {len(jijis)} movies")
+    print(f"Parse {len(jijis)} films")
 
     details = []
     multiple_choices = []
@@ -128,13 +128,13 @@ def main():
         else:
             no_title.append(jiji["id"])
 
-    movies = []
-    # Export movies.
-    os.makedirs("data/movies", exist_ok=True)
+    films = []
+    # Export films.
+    os.makedirs("data/films", exist_ok=True)
     for detail in details:
-        with open(f"data/movies/{detail['id']}.json", "w") as f:
+        with open(f"data/films/{detail['id']}.json", "w") as f:
             json.dump(detail, f, ensure_ascii=False, indent=2)
-            movies.append(
+            films.append(
                 {
                     "id": detail["id"],
                     "thumbnail": detail["image"].replace("/original/", "/w500/"),
@@ -142,22 +142,22 @@ def main():
                     "last_review_date": detail["reviews"][0]["review_date"],
                 }
             )
-    # Export movie-list.
-    with open(f"data/movie-list.json", "w") as f:
-        json.dump({"movies": movies}, f, ensure_ascii=False, indent=2)
+    # Export film-list.
+    with open(f"data/film-list.json", "w") as f:
+        json.dump({"films": films}, f, ensure_ascii=False, indent=2)
 
-    print(f'Map {len(details)} movies with TMDB to "tmdb.json".')
+    print(f'Map {len(details)} films with TMDB to "tmdb.json".')
     if len(multiple_choices) > 0:
-        print("The following movies have multiple choices:")
+        print("The following films have multiple choices:")
         print(", ".join(str(id) for id in multiple_choices))
     if len(fuzzy) > 0:
-        print("The following movies do not match their titles exactly:")
+        print("The following films do not match their titles exactly:")
         print(", ".join(str(id) for id in fuzzy))
     if len(no_result) > 0:
-        print("The following movies have no result:")
+        print("The following films have no result:")
         print(", ".join(str(id) for id in no_result))
     if len(no_title) > 0:
-        print("The following movies have no title:")
+        print("The following films have no title:")
         print(", ".join(str(id) for id in no_title))
 
 

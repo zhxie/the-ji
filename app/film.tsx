@@ -6,20 +6,20 @@ import { useEffect, useRef, useState } from "react";
 import { Animated, SafeAreaView, ScrollView, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Badge, HStack, Marquee, TextStyles, VStack, ViewStyles } from "../components";
-import { MovieDetail } from "../models/types";
-import { fetchMovie } from "../utils/api";
+import { FilmDetail } from "../models/types";
+import { fetchFilm } from "../utils/api";
 
 export default function ModalScreen() {
   const { id } = useSearchParams();
 
   const [ready, setReady] = useState(false);
-  const [movie, setMovie] = useState<MovieDetail>();
+  const [film, setFilm] = useState<FilmDetail>();
 
   useEffect(() => {
     (async () => {
-      const movie = await fetchMovie(parseInt(id));
-      if (movie) {
-        setMovie(movie);
+      const film = await fetchFilm(parseInt(id));
+      if (film) {
+        setFilm(film);
         setReady(true);
       }
     })();
@@ -39,9 +39,9 @@ export default function ModalScreen() {
     <SafeAreaProvider>
       <StatusBar style="light" />
       <View style={[ViewStyles.bg, ViewStyles.f]}>
-        {movie && (
+        {film && (
           <Animated.View style={[ViewStyles.f, { opacity: fade }]}>
-            <Image source={{ uri: movie.image }} transition={300} style={ViewStyles.f} />
+            <Image source={{ uri: film.image }} transition={300} style={ViewStyles.f} />
             <BlurView
               intensity={100}
               tint="dark"
@@ -52,9 +52,9 @@ export default function ModalScreen() {
                   <VStack style={ViewStyles.p4}>
                     <HStack center justify>
                       <HStack flex style={ViewStyles.mr2}>
-                        <Marquee style={TextStyles.title}>{movie.title}</Marquee>
+                        <Marquee style={TextStyles.title}>{film.title}</Marquee>
                       </HStack>
-                      <Badge title={movie.rating.toFixed(1)} textStyle={TextStyles.rating} />
+                      <Badge title={film.rating.toFixed(1)} textStyle={TextStyles.rating} />
                     </HStack>
                   </VStack>
                 </SafeAreaView>
