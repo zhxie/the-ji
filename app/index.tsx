@@ -41,6 +41,7 @@ const Page = () => {
             <MasonryFlashList
               data={films}
               numColumns={Math.ceil(Dimensions.get("window").width / 200)}
+              showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <Link href={{ pathname: "film", params: { id: item.id } }} asChild>
                   <TouchableOpacity>
