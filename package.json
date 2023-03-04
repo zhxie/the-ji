@@ -5,7 +5,9 @@
     "start": "expo start -p 5454",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint . --ext .tsx --ext .ts",
+    "format": "prettier --check ."
   },
   "dependencies": {
     "@shopify/flash-list": "1.4.0",
