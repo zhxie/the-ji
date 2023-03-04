@@ -176,15 +176,13 @@ jobs:
       - name: Build (Web)
         run: yarn predeploy
 
-      - name: Deploy to GitHub Pages
-        uses: actions/upload-artifact@master
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
-          path: web-build
-          if-no-files-found: error
+          path: web-build/
 
   deploy:
-    if: github.event == 'push'
+    if: github.event_name == 'push'
 
     runs-on: ubuntu-latest
 
