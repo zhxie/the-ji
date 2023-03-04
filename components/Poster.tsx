@@ -16,6 +16,7 @@ const Poster = (props: PosterProps) => {
         source={{ uri: props.uri }}
         transition={300}
         style={[ViewStyles.r2, { aspectRatio: 2 / 3 }]}
+        recyclingKey={props.uri}
       />
       <Badge
         title={props.rating.toFixed(1)}

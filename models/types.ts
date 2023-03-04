@@ -9,6 +9,11 @@ export interface FilmList {
   films: Film[];
 }
 
+export interface Review {
+  rating: number;
+  review_date: string;
+  scores: Record<string, number>;
+}
 export interface FilmDetail {
   id: number;
   tmdb?: number;
@@ -18,9 +23,5 @@ export interface FilmDetail {
   language: string;
   release_date: string;
   rating: number;
-  reviews: {
-    rating: number;
-    review_date: string;
-    scores: Record<string, number>;
-  };
+  reviews: Review[];
 }

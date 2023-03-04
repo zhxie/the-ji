@@ -4,6 +4,7 @@ import { TextStyles } from "./Styles";
 interface TextProps extends RNTextProps {
   subtle?: boolean;
   bold?: boolean;
+  underline?: boolean;
   center?: boolean;
 }
 
@@ -16,6 +17,7 @@ const Text = (props: TextProps) => {
         TextStyles.p,
         props.subtle ? TextStyles.subtle : TextStyles.main,
         props.bold && TextStyles.b,
+        props.underline && TextStyles.u,
         center && TextStyles.c,
         style,
       ]}

@@ -16,7 +16,7 @@ const Page = () => {
     (async () => {
       const list = await fetchFilmList();
       if (list) {
-        setFilms(list.films);
+        setFilms(list.films.sort((a, b) => b.last_review_date.localeCompare(a.last_review_date)));
         setReady(true);
       }
     })();

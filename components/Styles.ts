@@ -2,8 +2,9 @@ import { StyleSheet } from "react-native";
 
 const Color = {
   background: "black",
+  mask: "#0000007f",
   text: "white",
-  subtle: "gray",
+  subtle: "#ffffff7f",
 };
 
 const TextStyles = StyleSheet.create({
@@ -21,22 +22,41 @@ const TextStyles = StyleSheet.create({
   b: {
     fontWeight: "bold",
   },
+  u: {
+    textDecorationLine: "underline",
+  },
   c: {
     textAlign: "center",
   },
-  title: {
+  h1: {
     fontSize: 36,
     fontWeight: "bold",
+  },
+  h2: {
+    fontSize: 24,
   },
   rating: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  dimension: {
+    fontSize: 20,
+  },
+  score: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  footnote: {
+    fontSize: 16,
   },
 });
 
 const ViewStyles = StyleSheet.create({
   bg: {
     backgroundColor: Color.background,
+  },
+  mask: {
+    backgroundColor: Color.mask,
   },
   f: {
     flex: 1,

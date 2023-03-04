@@ -11,16 +11,7 @@ interface BadgeProps {
 
 const Badge = (props: BadgeProps) => {
   return (
-    <Center
-      style={[
-        ViewStyles.p2,
-        ViewStyles.r2,
-        {
-          backgroundColor: "#0000007f",
-        },
-        props.style,
-      ]}
-    >
+    <Center style={[ViewStyles.p2, ViewStyles.r2, ViewStyles.mask, props.style]}>
       <Text bold style={props.textStyle}>
         {props.title}
       </Text>
