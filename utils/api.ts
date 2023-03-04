@@ -1,7 +1,9 @@
 import { FilmList, FilmDetail } from "../models/types";
 
 export const fetchFilmList = async () => {
-  const res = await fetch("https://raw.fastgit.org/zhxie/the-ji-data/master/film-list.json");
+  const res = await fetch(
+    "https://ghproxy.com/https://raw.githubusercontent.com/zhxie/the-ji-data/master/film-list.json"
+  );
   if (res.status != 200) {
     return;
   }
@@ -10,7 +12,9 @@ export const fetchFilmList = async () => {
 };
 
 export const fetchFilm = async (id: number) => {
-  const res = await fetch(`https://raw.fastgit.org/zhxie/the-ji-data/master/films/${id}.json`);
+  const res = await fetch(
+    `https://ghproxy.com/https://raw.githubusercontent.com/zhxie/the-ji-data/master/films/${id}.json`
+  );
   if (res.status != 200) {
     return;
   }
