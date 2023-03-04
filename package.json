@@ -1,7 +1,6 @@
 {
   "name": "the-ji",
   "version": "1.0.0",
-  "homepage": "http://zhxie.github.io/the-ji",
   "private": true,
   "scripts": {
     "start": "expo start -p 5454",
