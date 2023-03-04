@@ -4,10 +4,11 @@ import { useSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as WebBrowser from "expo-web-browser";
 import { useEffect, useRef, useState } from "react";
-import { Animated, SafeAreaView, TouchableOpacity, View } from "react-native";
+import { Animated, SafeAreaView, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   Badge,
+  Center,
   Color,
   HStack,
   Icon,
@@ -36,6 +37,7 @@ const Dimensions = [
 
 export default function ModalScreen() {
   const { id } = useSearchParams();
+  const { width } = useWindowDimensions();
 
   const [ready, setReady] = useState(false);
   const [film, setFilm] = useState<FilmDetail>();
@@ -80,93 +82,109 @@ export default function ModalScreen() {
         {film && (
           <Animated.View style={[ViewStyles.f, { opacity: fade }]}>
             <Image source={{ uri: film.image }} transition={300} style={ViewStyles.f} />
-            <BlurView
-              intensity={100}
-              tint="dark"
-              style={{ position: "absolute", width: "100%", height: "100%" }}
+            <Center
+              flex
+              style={{ position: "absolute", width: "100%", height: "100%", overflow: "hidden" }}
             >
-              <SafeAreaView style={ViewStyles.f}>
-                <VStack flex justify style={ViewStyles.p4}>
-                  <VStack style={ViewStyles.mb1}>
-                    <HStack center justify style={ViewStyles.mb1}>
-                      <HStack flex style={ViewStyles.mr2}>
-                        <Marquee style={TextStyles.h1}>{film.title}</Marquee>
-                      </HStack>
-                      <Badge title={film.rating.toFixed(1)} textStyle={TextStyles.rating} />
-                    </HStack>
-                    <HStack center>
-                      <Badge
-                        title={film.language.toUpperCase()}
-                        style={[ViewStyles.py1, ViewStyles.mr2]}
-                      />
-                      <HStack flex>
-                        <Marquee>
-                          <Text style={TextStyles.h2}>
-                            {film.original_title}{" "}
-                            <Text subtle style={TextStyles.h2}>
-                              {!!film.release_date && `(${film.release_date.substring(0, 4)})`}
-                            </Text>
-                          </Text>
-                        </Marquee>
-                      </HStack>
-                    </HStack>
-                  </VStack>
-                  <VStack>
-                    <HStack justify style={ViewStyles.mb2}>
-                      <TouchableOpacity disabled={film.reviews.length <= 1} onPress={onReviewPress}>
-                        <Text bold>
-                          {film.reviews.length <= 1 ? "REVIEW" : `REVIEW ${review + 1}`}
-                        </Text>
-                      </TouchableOpacity>
-                      <Text bold>{film.reviews[review].review_date}</Text>
-                    </HStack>
-                    <VStack
-                      style={[
-                        ViewStyles.px2,
-                        ViewStyles.py1,
-                        ViewStyles.r2,
-                        ViewStyles.mask,
-                        !!film.tmdb && ViewStyles.mb2,
-                      ]}
-                    >
-                      {Dimensions.map((dimension, i, dimensions) => (
-                        <HStack
-                          key={dimension.key}
-                          center
-                          justify
-                          style={[
-                            ViewStyles.px1,
-                            ViewStyles.py2,
-                            i !== dimensions.length - 1 && {
-                              borderBottomColor: "#ffffff1f",
-                              borderBottomWidth: 1,
-                            },
-                          ]}
-                        >
-                          <Text style={TextStyles.dimension}>{dimension.name}</Text>
-                          <Text style={TextStyles.score}>
-                            {film.reviews[review].scores[dimension.key] || "N/A"}
-                          </Text>
+              <BlurView
+                intensity={100}
+                tint="dark"
+                style={[
+                  width <= 450 && { width: "100%", height: "100%" },
+                  width > 450 && ViewStyles.r2,
+                  width > 450 && {
+                    flexShrink: 1,
+                    width: 450,
+                    height: 675,
+                  },
+                ]}
+              >
+                <SafeAreaView style={ViewStyles.f}>
+                  <VStack flex justify style={ViewStyles.p4}>
+                    <VStack style={ViewStyles.mb1}>
+                      <HStack center justify style={ViewStyles.mb1}>
+                        <HStack flex style={ViewStyles.mr2}>
+                          <Marquee style={TextStyles.h1}>{film.title}</Marquee>
                         </HStack>
-                      ))}
-                    </VStack>
-                    {!!film.tmdb && (
-                      <HStack justify>
-                        <HStack flex />
-                        <TouchableOpacity onPress={onTmdbPress}>
-                          <HStack center>
-                            <Text bold style={ViewStyles.mr1}>
-                              SEE MORE ON TMDB
-                            </Text>
-                            <Icon name="arrow-right" size={14} color={Color.text} />
-                          </HStack>
-                        </TouchableOpacity>
+                        <Badge title={film.rating.toFixed(1)} textStyle={TextStyles.rating} />
                       </HStack>
-                    )}
+                      <HStack center>
+                        <Badge
+                          title={film.language.toUpperCase()}
+                          style={[ViewStyles.py1, ViewStyles.mr2]}
+                        />
+                        <HStack flex>
+                          <Marquee>
+                            <Text style={TextStyles.h2}>
+                              {film.original_title}{" "}
+                              <Text subtle style={TextStyles.h2}>
+                                {!!film.release_date && `(${film.release_date.substring(0, 4)})`}
+                              </Text>
+                            </Text>
+                          </Marquee>
+                        </HStack>
+                      </HStack>
+                    </VStack>
+                    <VStack>
+                      <HStack justify style={ViewStyles.mb2}>
+                        <TouchableOpacity
+                          disabled={film.reviews.length <= 1}
+                          onPress={onReviewPress}
+                        >
+                          <Text bold>
+                            {film.reviews.length <= 1 ? "REVIEW" : `REVIEW ${review + 1}`}
+                          </Text>
+                        </TouchableOpacity>
+                        <Text bold>{film.reviews[review].review_date}</Text>
+                      </HStack>
+                      <VStack
+                        style={[
+                          ViewStyles.px2,
+                          ViewStyles.py1,
+                          ViewStyles.r2,
+                          ViewStyles.mask,
+                          !!film.tmdb && ViewStyles.mb2,
+                        ]}
+                      >
+                        {Dimensions.map((dimension, i, dimensions) => (
+                          <HStack
+                            key={dimension.key}
+                            center
+                            justify
+                            style={[
+                              ViewStyles.px1,
+                              ViewStyles.py2,
+                              i !== dimensions.length - 1 && {
+                                borderBottomColor: "#ffffff1f",
+                                borderBottomWidth: 1,
+                              },
+                            ]}
+                          >
+                            <Text style={TextStyles.dimension}>{dimension.name}</Text>
+                            <Text style={TextStyles.score}>
+                              {film.reviews[review].scores[dimension.key] || "N/A"}
+                            </Text>
+                          </HStack>
+                        ))}
+                      </VStack>
+                      {!!film.tmdb && (
+                        <HStack justify>
+                          <HStack flex />
+                          <TouchableOpacity onPress={onTmdbPress}>
+                            <HStack center>
+                              <Text bold style={ViewStyles.mr1}>
+                                SEE MORE ON TMDB
+                              </Text>
+                              <Icon name="arrow-right" size={14} color={Color.text} />
+                            </HStack>
+                          </TouchableOpacity>
+                        </HStack>
+                      )}
+                    </VStack>
                   </VStack>
-                </VStack>
-              </SafeAreaView>
-            </BlurView>
+                </SafeAreaView>
+              </BlurView>
+            </Center>
           </Animated.View>
         )}
       </View>

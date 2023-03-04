@@ -1,6 +1,7 @@
-import { StyleProp, TextStyle } from "react-native";
+import { Platform, StyleProp, TextStyle } from "react-native";
 import TextTicker from "react-native-text-ticker";
 import { TextStyles } from "./Styles";
+import Text from "./Text";
 
 interface MarqueeProps {
   style?: StyleProp<TextStyle>;
@@ -8,6 +9,14 @@ interface MarqueeProps {
 }
 
 const Marquee = (props: MarqueeProps) => {
+  if (Platform.OS === "web") {
+    return (
+      <Text numberOfLines={1} style={[TextStyles.p, props.style]}>
+        {props.children}
+      </Text>
+    );
+  }
+
   return (
     <TextTicker
       animationType="scroll"

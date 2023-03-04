@@ -2,13 +2,15 @@ import { MasonryFlashList } from "@shopify/flash-list";
 import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, TouchableOpacity, View } from "react-native";
+import { Animated, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Poster, ViewStyles } from "../components";
 import { Film } from "../models/types";
 import { fetchFilmList } from "../utils/api";
 
 const Page = () => {
+  const { width } = useWindowDimensions();
+
   const [ready, setReady] = useState(false);
   const [films, setFilms] = useState<Film[]>();
 
@@ -40,7 +42,7 @@ const Page = () => {
           <Animated.View style={[ViewStyles.f, { opacity: fade }]}>
             <MasonryFlashList
               data={films}
-              numColumns={Math.ceil(Dimensions.get("window").width / 200)}
+              numColumns={Math.ceil(width / 200)}
               showsVerticalScrollIndicator={false}
               renderItem={({ item }) => (
                 <Link href={{ pathname: "film", params: { id: item.id } }} asChild>
