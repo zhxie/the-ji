@@ -22,12 +22,12 @@ import { fetchFilm } from "../utils/api";
 
 const Dimensions = [
   { name: "First Impression", key: "firstImpression" },
-  { name: "Overall Feeling", key: "overallFeeling" },
+  { name: "Review", key: "review" },
   { name: "Story", key: "story" },
   { name: "Character", key: "character" },
-  { name: "Director", key: "director" },
-  { name: "Performance", key: "performance" },
-  { name: "Visual", key: "visual" },
+  { name: "Directing", key: "directing" },
+  { name: "Acting", key: "acting" },
+  { name: "Picture", key: "picture" },
   { name: "Art", key: "art" },
   { name: "Editing", key: "editing" },
   { name: "Sound", key: "sound" },

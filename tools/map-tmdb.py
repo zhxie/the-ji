@@ -64,12 +64,12 @@ def main():
                             "rating": float(rating),
                             "scores": {
                                 "firstImpression": parseInt(firstImpression),
-                                "overallFeeling": parseInt(overallFeeling),
+                                "review": parseInt(overallFeeling),
                                 "story": parseInt(story),
                                 "character": parseInt(character),
-                                "director": parseInt(director),
-                                "performance": parseInt(performance),
-                                "visual": parseInt(visual),
+                                "directing": parseInt(director),
+                                "acting": parseInt(performance),
+                                "picture": parseInt(visual),
                                 "art": parseInt(art),
                                 "editing": parseInt(editing),
                                 "sound": parseInt(sound),
@@ -134,6 +134,7 @@ def main():
     for detail in details:
         with open(f"data/films/{detail['id']}.json", "w") as f:
             json.dump(detail, f, ensure_ascii=False, indent=2)
+            f.write("\n")
             films.append(
                 {
                     "id": detail["id"],
@@ -145,6 +146,7 @@ def main():
     # Export film-list.
     with open(f"data/film-list.json", "w") as f:
         json.dump({"films": films}, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
     print(f'Map {len(details)} films with TMDB to "tmdb.json".')
     if len(multiple_choices) > 0:
