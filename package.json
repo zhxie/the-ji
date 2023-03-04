@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "lint": "eslint . --ext .tsx --ext .ts",
     "format": "prettier --check .",
-    "predeploy": "expo export:web"
+    "predeploy": "expo export -p web"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
